@@ -1,9 +1,17 @@
-import { StyleSheet, TextInput, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, TextInput,Text, View } from 'react-native'
+import React,{useState} from 'react'
 import colors from '../utils/colors'
+import {Picker} from '@react-native-picker/picker';
 
+//instalar picket 
+//https://yarnpkg.com/package?q=react%20native%20picker%20pic&name=%40react-native-picker%2Fpicker
+//Getting started
+//Usage
 
 export default function Form() {
+
+    const [selectedLanguage, setSelectedLanguage] = useState();
+
   return (
     <View style = {styles.viewForm}>
         <View style={styles.viewInputs}>
@@ -17,6 +25,25 @@ export default function Form() {
             keyboardType='numeric'
             style={[styles.input,styles.inputPercentage]}
             ></TextInput>
+        </View>
+        <View>
+            <Picker
+            style ={PickerStyles.input}
+            selectedValue={selectedLanguage}
+            onValueChange={(itemValue, itemIndex) =>
+                setSelectedLanguage(itemValue)
+            }>
+                <Picker.Item label="3 meses" value={3} />
+                <Picker.Item label="6 meses" value={6} />
+                <Picker.Item label="9 meses" value={9} />
+                <Picker.Item label="12 meses" value={12} />
+                <Picker.Item label="24 meses" value={24} />
+                
+            </Picker>
+
+        </View>
+        <View>
+            <Text>S = {selectedLanguage}</Text>
         </View>
         
     </View>
@@ -39,7 +66,7 @@ const styles = StyleSheet.create({
     },
     input:{
         backgroundColor:'#fff',
-        height:50,
+        height:180,
         width:'60%',
         marginBottom:10,
         marginTop:10,
@@ -54,5 +81,14 @@ const styles = StyleSheet.create({
     inputPercentage:{
         width:'40%',
         marginLeft:5
+    }
+})
+
+const PickerStyles = StyleSheet.create({
+    input:{
+        backgroundColor:'aqua',
+        borderWidth:5,
+        borderColor:'black',
+        paddingVertical:10,
     }
 })
