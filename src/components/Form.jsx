@@ -3,13 +3,14 @@ import React,{useState} from 'react'
 import colors from '../utils/colors'
 import {Picker} from '@react-native-picker/picker';
 
+
 //instalar picket 
 //https://yarnpkg.com/package?q=react%20native%20picker%20pic&name=%40react-native-picker%2Fpicker
 //Getting started
 //Usage
 
-export default function Form() {
-
+export default function Form(props) {
+    const {setcapital, setinteres, setmeses} = props
     const [selectedLanguage, setSelectedLanguage] = useState();
 
   return (
@@ -19,19 +20,23 @@ export default function Form() {
             placeholder='Cantidad a pedir'
             keyboardType='numeric'
             style={styles.input}
+            onChange={e=> setcapital(e.nativeEvent.text)}
             ></TextInput>
+
             <TextInput 
             placeholder='Interes %'
             keyboardType='numeric'
             style={[styles.input,styles.inputPercentage]}
+            onChange={e=> setinteres(e.nativeEvent.text)}
             ></TextInput>
         </View>
         <View>
             <Picker
             style ={PickerStyles.input}
             selectedValue={selectedLanguage}
-            onValueChange={(itemValue, itemIndex) =>
+            onValueChange={(itemValue, itemIndex) =>{
                 setSelectedLanguage(itemValue)
+                setmeses(itemValue)}
             }>
                 <Picker.Item label="3 meses" value={3} />
                 <Picker.Item label="6 meses" value={6} />
@@ -43,7 +48,8 @@ export default function Form() {
 
         </View>
         <View>
-            <Text>S = {selectedLanguage}</Text>
+            <Text>Total = {selectedLanguage}</Text>
+            
         </View>
         
     </View>
@@ -53,9 +59,10 @@ export default function Form() {
 const styles = StyleSheet.create({
     viewForm:{
         position:'absolute',
-        bottom:0,
+        bottom:100,
+        flex:1,
         paddingHorizontal:50,
-        height:150,
+        height:300,
         width: '85%',
         backgroundColor : colors.PRIMARY_COLOR,
         borderRadius:30,
@@ -91,4 +98,7 @@ const PickerStyles = StyleSheet.create({
         borderColor:'black',
         paddingVertical:10,
     }
-})
+})//instalar picket 
+//https://yarnpkg.com/package?q=react%20native%20picker%20pic&name=%40react-native-picker%2Fpicker
+//Getting started
+//Usage
